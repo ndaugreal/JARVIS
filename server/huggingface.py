@@ -1,4 +1,5 @@
 import io
+import os
 from diffusers.utils import load_image
 from huggingface_hub.inference_api import InferenceApi
 
@@ -8,6 +9,6 @@ def image_to_bytes(img_url):
     img_data = img_byte.getvalue()
     return img_data
 
-inference = InferenceApi("lambdalabs/sd-image-variations-diffusers", token="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")
+inference = InferenceApi("lambdalabs/sd-image-variations-diffusers", token=os.environ["HUGGINGFACE_TOKEN"])
 result = inference(data=image_to_bytes("https://raw.githubusercontent.com/justinpinkney/stable-diffusion/main/assets/im-vars-thin.jpg"))
 print(result)
